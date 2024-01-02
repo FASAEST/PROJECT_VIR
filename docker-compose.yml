@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    volumes:
+       - .:/nginx.conf
+      #- /autre/chemin/vers/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - frontend
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: my_database
+      POSTGRES_USER: my_user
+      POSTGRES_PASSWORD: my_password
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
